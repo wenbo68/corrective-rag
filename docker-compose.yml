@@ -1,0 +1,38 @@
+services:
+  # Service 1: Your RAG Application
+  rag-app:
+    build: . # Build the Dockerfile in the current directory
+    image: wenboliu68/corrective-rag:latest
+    container_name: rag_app # Name of the container
+    ports:
+      - '8501:8501' # Map VPS port 8501 to Container port 8501
+    volumes:
+      # Map the chroma_db folder on your VPS to the folder inside the container
+      # FORMAT: ./local_path : /container_path
+      - ./chroma_data:/app/chroma_db
+    environment:
+      # Tell the Python app where to find Ollama
+      # "ollama-service" is the name of the service defined below
+      - OLLAMA_HOST=http://ollama-service:11434
+    depends_on:
+      - ollama-service # Wait for Ollama to start before starting app
+
+  # Service 2: Ollama (The AI Engine)
+  ollama-service:
+    image: ollama/ollama:latest # Use the official image
+    container_name: ollama_backend
+    volumes:
+      # specific volume to store the models (llama3.2) so you don't download them every restart
+      - ollama_models:/root/.ollama
+    # (Optional) If your VPS has a GPU, uncomment these lines:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+# Define the persistent storage volume for Ollama models
+volumes:
+  ollama_models:

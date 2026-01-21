@@ -1,0 +1,15 @@
+# Ignore the virtual environment (we build a fresh one inside Docker)
+venv/
+.venv/
+
+# Ignore local database files (we will map these in, not copy them)
+src/chroma_db/
+chroma_db/
+
+# Ignore cached python files
+__pycache__/
+*.pyc
+
+# Ignore git history
+.git/
+.gitignore
