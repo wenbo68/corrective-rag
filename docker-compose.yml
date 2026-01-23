@@ -1,8 +1,8 @@
 services:
   # Service 1: Your RAG Application
   rag-app:
-    build: . # Build the Dockerfile in the current directory
-    image: wenboliu68/corrective-rag:latest
+    build: . # Build the Dockerfile in the current directory; remove this line and it will find/pull from Docker Hub
+    image: wenboliu68/ollama-rag:latest
     container_name: rag_app # Name of the container
     ports:
       - '8501:8501' # Map VPS port 8501 to Container port 8501
@@ -23,6 +23,7 @@ services:
     container_name: ollama_backend
     volumes:
       # specific volume to store the models (llama3.2) so you don't download them every restart
+      # FORMAT: volume_name : /container_path
       - ollama_models:/root/.ollama
     # (Optional) If your VPS has a GPU, uncomment these lines:
     # deploy:

@@ -1,10 +1,20 @@
-# corrective-rag
+# rag
+
+### Stack
+
+- vector db: chroma
+- embedding model: all-MiniLM-L6-v2 (chroma default)
+- inference model: llama-3.2 (3B)
+- inference engine: ollama
+- frontend: streamlit
+- containerization: docker (1 container for app + volume for chroma, 1 container for ollama + volume for inference models)
+- deployment: VPS (Contabo 10; CPU)
 
 ### Steps
 
-- install deps in venv
-- run fillDb.py with a context file of your choice
-- run corrective-rag: give it a question and it should answer
+- run docker-setup-script.sh in dir with the docker-compose.yml
+- visit your-ip:8501
+- run docker-takedown-script.sh in dir with the docker-compose.yml
 
 ### Reminders
 
