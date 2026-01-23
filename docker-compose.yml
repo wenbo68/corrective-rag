@@ -3,7 +3,7 @@ services:
   rag-app:
     build: . # Build the Dockerfile in the current directory; remove this line and it will find/pull from Docker Hub
     image: wenboliu68/ollama-rag:latest
-    container_name: rag_app # Name of the container
+    container_name: ollama-rag-app # Name of the container
     ports:
       - '8501:8501' # Map VPS port 8501 to Container port 8501
     volumes:
@@ -20,7 +20,7 @@ services:
   # Service 2: Ollama (The AI Engine)
   ollama-service:
     image: ollama/ollama:latest # Use the official image
-    container_name: ollama_backend
+    container_name: ollama-backend
     volumes:
       # specific volume to store the models (llama3.2) so you don't download them every restart
       # FORMAT: volume_name : /container_path
@@ -34,6 +34,7 @@ services:
     #           count: 1
     #           capabilities: [gpu]
 
+# Top-level volumes definition
 # Define the persistent storage volume for Ollama models
 volumes:
   ollama_models:

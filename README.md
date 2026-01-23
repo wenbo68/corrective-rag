@@ -12,6 +12,22 @@
 
 ### Steps
 
+##### run locally
+
+- clone repo
+- run docker-setup-script.sh in dir with the docker-compose.yml
+- visit your-ip:8501
+- run docker-takedown-script.sh in dir with the docker-compose.yml
+
+##### run in server (use below steps if you want 0 code in server; otherwise just repeat above steps in server)
+
+- first clone repo locally
+- then build the app image, upload to docker hub, and delete the image locally...
+- docker build -t wenboliu68/ollama-rag:latest the-directory-that-contains-the-Dockerfile
+- docker login
+- docker push wenboliu68/ollama-rag:latest
+- docker rmi wenboliu68/ollama-rag:latest
+- then ssh into your server, create a folder, paste the docker-compose.yml in the folder, remove "build: ." under service 1
 - run docker-setup-script.sh in dir with the docker-compose.yml
 - visit your-ip:8501
 - run docker-takedown-script.sh in dir with the docker-compose.yml
