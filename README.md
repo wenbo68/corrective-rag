@@ -1,4 +1,4 @@
-# rag
+# rag with self-hosted inference
 
 ### Stack
 
